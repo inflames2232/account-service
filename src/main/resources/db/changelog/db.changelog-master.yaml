@@ -1,0 +1,173 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: create_account_table
+      author: west223
+      changes:
+        - createTable:
+            tableName: account
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pc_account
+                    nullable: false
+              - column:
+                  name: account_number
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamp
+              - column:
+                  name: updated_at
+                  type: timestamp
+
+  - changeSet:
+      id: create_customer_table
+      author: west223
+      changes:
+        - createTable:
+            tableName: customer
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pc_customer
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: account_id
+                  type: UUID
+                  constraints:
+                    nullable: #false
+                    foreignKeyName: fk_customer_account
+                    references: account(id)
+              - column:
+                  name: created_at
+                  type: timestamp
+              - column:
+                  name: updated_at
+                  type: timestamp
+
+
+  - changeSet:
+      id: create_credit_card_table
+      author: west223
+      changes:
+        - createTable:
+            tableName: credit_card
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pc_credit_card
+                    nullable: false
+              - column:
+                  name: number
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: type
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: account_id
+                  type: UUID
+                  constraints:
+                    nullable: #false
+                    foreignKeyName: fk_card_account
+                    references: account(id)
+              - column:
+                  name: created_at
+                  type: timestamp
+              - column:
+                  name: updated_at
+                  type: timestamp
+
+  - changeSet:
+      id: create_address_table
+      author: west223
+      changes:
+        - createTable:
+            tableName: address
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pc_address
+                    nullable: false
+              - column:
+                  name: street1
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: street2
+                  type: varchar(255)
+              - column:
+                  name: state
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: city
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: country
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: zip_code
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: type
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: account_id
+                  type: UUID
+                  constraints:
+                    #nullable: false
+                    foreignKeyName: fk_address_account
+                    references: account(id)
+              - column:
+                  name: created_at
+                  type: timestamp
+              - column:
+                  name: updated_at
+                  type: timestamp
+
+
+
